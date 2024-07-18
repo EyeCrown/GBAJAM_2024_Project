@@ -1,6 +1,0 @@
--xc++
--std=c++20
--ID:/../Butano/butano/include/
--ID:/../Butano/common/include/
--Iinclude/
--Ibuild/

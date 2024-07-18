@@ -77,7 +77,9 @@ main.o: C:/Coding/GameBoyAdvance/MyGame/src/main.cpp \
  C:/Coding/GameBoyAdvance/Butano/butano/include/bn_sprite_font.h \
  C:/Coding/GameBoyAdvance/Butano/butano/include/bn_utf8_characters_map.h \
  C:/Coding/GameBoyAdvance/MyGame/build/bn_sprite_items_common_variable_8x16_font.h \
- C:/Coding/GameBoyAdvance/Butano/butano/include/bn_sprite_item.h
+ C:/Coding/GameBoyAdvance/Butano/butano/include/bn_sprite_item.h \
+ C:/Coding/GameBoyAdvance/MyGame/include/player.h \
+ C:/Coding/GameBoyAdvance/Butano/butano/include/bn_fixed.h
 C:/Coding/GameBoyAdvance/Butano/butano/include/bn_core.h:
 C:/Coding/GameBoyAdvance/Butano/butano/include/bn_span.h:
 C:/Coding/GameBoyAdvance/Butano/butano/include/bn_array.h:
@@ -157,3 +159,5 @@ C:/Coding/GameBoyAdvance/Butano/butano/include/bn_sprite_font.h:
 C:/Coding/GameBoyAdvance/Butano/butano/include/bn_utf8_characters_map.h:
 C:/Coding/GameBoyAdvance/MyGame/build/bn_sprite_items_common_variable_8x16_font.h:
 C:/Coding/GameBoyAdvance/Butano/butano/include/bn_sprite_item.h:
+C:/Coding/GameBoyAdvance/MyGame/include/player.h:
+C:/Coding/GameBoyAdvance/Butano/butano/include/bn_fixed.h:
