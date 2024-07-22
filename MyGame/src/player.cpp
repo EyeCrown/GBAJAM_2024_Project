@@ -13,17 +13,10 @@ namespace mygame
         zPos = zStart;
 
         //camera = dsd::camera;
+
+        mSprite = bn::sprite_items::red_sprite.create_sprite(0,0);
     }
 
-
-    // void Player::_update()
-    // {
-    //     _rotate();
-    //     _move();
-        
-    //     _update_camera_data();
-
-    // }
 
     void Player::_update()
     {
@@ -31,16 +24,6 @@ namespace mygame
         bn::fixed dir_z = 0;
 
         _update_dir_z(dir_z);
-
-
-        // if(bn::keypad::down_held())
-        // {
-        //     dir_z += bn::fixed::from_data(32);
-        // }
-        // else if(bn::keypad::up_held())
-        // {
-        //     dir_z -= bn::fixed::from_data(32);
-        // }
 
         if(bn::keypad::b_held())
         {
@@ -58,12 +41,16 @@ namespace mygame
         {
             camera.phi -= 4;
 
+            //body_sprite.set_tiles(bn::sprite_items::player_body.tiles_item().create_tiles(8));
+
             if(camera.phi < 0)
                 camera.phi += 2048;
         }
         else if(bn::keypad::right_held())
         {
             camera.phi += 4;
+
+            //body_sprite.set_tiles(bn::sprite_items::player_body.tiles_item().create_tiles(8));
 
             if(camera.phi >= 2048)
                 camera.phi -= 2048;
@@ -84,10 +71,12 @@ namespace mygame
         if(bn::keypad::down_held())
         {
             dir_z += bn::fixed::from_data(32);
+            //body_sprite.set_tiles(bn::sprite_items::player_body.tiles_item().create_tiles(8));
         }
         else if(bn::keypad::up_held())
         {
             dir_z -= bn::fixed::from_data(32);
+            //body_sprite.set_tiles(bn::sprite_items::player_body.tiles_item().create_tiles(8));
         }
     }
 
@@ -153,8 +142,8 @@ namespace mygame
     
     void Player::_update_camera_data()
     {
-        bn::fixed dir_x = bn::fixed::from_data(xPos.data() );// - mOffsetCameraX.data());
-        bn::fixed dir_z = bn::fixed::from_data(zPos.data() );// - mOffsetCameraZ.data());
+        bn::fixed dir_x = bn::fixed::from_data(xPos.data()); // - mOffsetCameraX.data());
+        bn::fixed dir_z = bn::fixed::from_data(zPos.data()); // - mOffsetCameraZ.data());
 
         camera.x += (dir_x * cos) - (dir_z * sin);
         camera.z += (dir_x * sin) + (dir_z * cos);
