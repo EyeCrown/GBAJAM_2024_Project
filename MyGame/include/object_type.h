@@ -10,7 +10,6 @@ namespace mygame
     class Object
     {
         public:
-        Object();
         Object(bn::fixed x, bn::fixed z, bn::sprite_ptr* sprite);
 
         bn::sprite_ptr spriteObj;
@@ -20,6 +19,8 @@ namespace mygame
         private:
         bn::fixed xPos { 0 };
         bn::fixed zPos { 0 };
+
+        mygame::vector position { mygame::vector(0, 0, 0) };
 
         bn::fixed xSpritePos { 0 };
         bn::fixed ySpritePos { 0 };

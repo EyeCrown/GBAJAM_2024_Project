@@ -9,10 +9,9 @@ namespace mygame
 
     Player::Player(bn::fixed xStart, bn::fixed zStart)
     {
-        xPos = xStart;
-        zPos = zStart;
-
-        //camera = dsd::camera;
+        position = mygame::vector(xStart, 0, zStart);
+        
+        camera.position = mygame::vector(0, 32, 0);
 
         mSprite = bn::sprite_items::red_sprite.create_sprite(0,0);
     }
@@ -27,14 +26,14 @@ namespace mygame
 
         if(bn::keypad::b_held())
         {
-            camera.y -= bn::fixed::from_data(2048);
+            camera.position.y -= bn::fixed::from_data(2048);
 
-            if(camera.y < 0)
-                camera.y = 0;
+            if(camera.position.y < 0)
+                camera.position.y = 0;
         }
         else if(bn::keypad::a_held())
         {
-            camera.y += bn::fixed::from_data(2048);
+            camera.position.y += bn::fixed::from_data(2048);
         }
 
         if(bn::keypad::left_held())
@@ -58,11 +57,12 @@ namespace mygame
 
         camera.cos = bn::lut_cos(camera.phi).data() >> 4;
         camera.sin = bn::lut_sin(camera.phi).data() >> 4;
-        xPos += (dir_x * camera.cos) - (dir_z * camera.sin);
-        zPos += (dir_x * camera.sin) + (dir_z * camera.cos);
 
-        camera.x = xPos + (mOffsetCameraX * camera.cos) - (mOffsetCameraZ * camera.sin);
-        camera.z = zPos - (mOffsetCameraX * camera.sin) + (mOffsetCameraZ * camera.cos);
+        position.x += (0 * camera.cos) - (dir_z * camera.sin);
+        position.z += (0 * camera.sin) + (dir_z * camera.cos);
+
+        camera.position.x = position.x + (mOffsetCameraX * camera.cos) - (mOffsetCameraZ * camera.sin);
+        camera.position.z = position.z - (mOffsetCameraX * camera.sin) + (mOffsetCameraZ * camera.cos);
     }
 
 
@@ -87,15 +87,6 @@ namespace mygame
         //bn::fixed dir_x = 0;
         bn::fixed dir_z = 0;
 
-        // if(bn::keypad::left_held())
-        // {
-        //     dir_x -= bn::fixed::from_data(16);
-        // }
-        // else if(bn::keypad::right_held())
-        // {
-        //     dir_x += bn::fixed::from_data(16);
-        // }
-
         if(bn::keypad::down_held())
         {
             dir_z += bn::fixed::from_data(16);
@@ -105,14 +96,14 @@ namespace mygame
             dir_z -= bn::fixed::from_data(16);
         }
 
-        xPos += (xPos * camera.cos) - (dir_z * camera.sin);
-        zPos += (xPos * camera.sin) + (dir_z * camera.cos);
+        position.x += (position.x * camera.cos) - (dir_z * camera.sin);
+        position.z += (position.x * camera.sin) + (dir_z * camera.cos);
     }
 
     void Player::_setPosition(bn::fixed xValue, bn::fixed zValue)
     {
-        xPos = xValue;
-        zPos = zValue;
+        position.x = xValue;
+        position.z = zValue;
     }
 
     void Player::_rotate()
@@ -142,8 +133,8 @@ namespace mygame
     
     void Player::_update_camera_data()
     {
-        bn::fixed dir_x = bn::fixed::from_data(xPos.data()); // - mOffsetCameraX.data());
-        bn::fixed dir_z = bn::fixed::from_data(zPos.data()); // - mOffsetCameraZ.data());
+        bn::fixed dir_x = bn::fixed::from_data(position.x.data()); // - mOffsetCameraX.data());
+        bn::fixed dir_z = bn::fixed::from_data(position.z.data()); // - mOffsetCameraZ.data());
 
         camera.x += (dir_x * cos) - (dir_z * sin);
         camera.z += (dir_x * sin) + (dir_z * cos);

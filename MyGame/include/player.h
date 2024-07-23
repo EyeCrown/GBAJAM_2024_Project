@@ -7,6 +7,8 @@
 #include "bn_sprite_items_player_body.h" // Player sprite
 #include "bn_sprite_items_red_sprite.h"
 
+#include "mg_vector.h"
+
 namespace mygame
 {
     struct camera
@@ -14,17 +16,23 @@ namespace mygame
         bn::fixed x = 0;
         bn::fixed y = 32;
         bn::fixed z = 0;
+
+        mygame::vector position;
+        mygame::vector direction;
+
         int phi = 0;
         int cos = 0;
         int sin = 0;
+
+        
     };
     
     class Player 
     {
         public:
 
-        bn::fixed xPos;
-        bn::fixed zPos;
+        mygame::vector position;
+
         int phi = 0;
         int cos = 0;
         int sin = 0;

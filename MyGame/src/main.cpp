@@ -24,9 +24,9 @@ namespace
 {
     void update_hbe_values(const mygame::Player& player, int16_t* pa_values, int16_t* pc_values, int* dx_values, int* dy_values)
     {
-        int camera_x = player.camera.x.data();
-        int camera_y = player.camera.y.data() >> 4;
-        int camera_z = player.camera.z.data();
+        int camera_x = player.camera.position.x.data();
+        int camera_y = player.camera.position.y.data() >> 4;
+        int camera_z = player.camera.position.z.data();
         int camera_cos = player.camera.cos;
         int camera_sin = player.camera.sin;
         int y_shift = 1024;

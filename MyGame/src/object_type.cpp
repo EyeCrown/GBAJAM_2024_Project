@@ -8,34 +8,52 @@ namespace mygame
 
     void Object::_update(mygame::Player* player)
     {
-        bn::fixed sizeSpriteValue = spriteObj.horizontal_scale();
 
-        bn::fixed dist[2] = 
+        bn::fixed vectPlayerToObject[2] = 
         {
-            xPos - player->xPos,
-            zPos - player->zPos
+            xPos - player->position.x,
+            zPos - player->position.z
         };
 
-        bn::fixed norm = (dist[0] * dist[0]) + (dist[1] * dist[1]);
+        bn::fixed distPlayerToObject = (vectPlayerToObject[0] * vectPlayerToObject[0]) + 
+                (vectPlayerToObject[1] * vectPlayerToObject[1]); // ||u||² = x² + y²
 
-        bn::fixed distMin = 0.1, distMax = 1000;
+        bn::fixed distMaxVisible = 30000;
+        bn::fixed distClose = 8000;
+        bn::fixed sizeSpriteValue;
 
-        sizeSpriteValue = norm * (distMax - bn::max(distMin, bn::min(norm, distMax))); 
-
-        if (sizeSpriteValue <= 0)
+        if (distPlayerToObject > distMaxVisible)
         {
-            //spriteObj.set_visible(false);
+            spriteObj.set_visible(false);
+        }
+        else if (distPlayerToObject > distClose)
+        {
+            spriteObj.set_visible(true);
+
+            sizeSpriteValue = 0.2;
+            spriteObj.set_horizontal_scale(sizeSpriteValue); // Put it in function
+            spriteObj.set_vertical_scale(sizeSpriteValue);
         }
         else
         {
             spriteObj.set_visible(true);
+            sizeSpriteValue = 1 - (distPlayerToObject / distClose);
+
+            sizeSpriteValue *= 2;
+
             spriteObj.set_horizontal_scale(sizeSpriteValue);
             spriteObj.set_vertical_scale(sizeSpriteValue);
         }
 
-        // bn::fixed xPosSpriteValue   = 0;
+        bn::fixed xPosSpriteValue   = spriteObj.x();
+        
         // bn::fixed yPosSpriteValue   = 0;
-        // spriteObj.set_x(xPosSpriteValue);
+
+       
+
+
+
+        spriteObj.set_x(xPosSpriteValue);
         // spriteObj.set_y(yPosSpriteValue);
     }
 }
