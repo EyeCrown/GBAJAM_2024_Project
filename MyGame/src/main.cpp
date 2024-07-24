@@ -34,9 +34,9 @@ namespace
         for(int index = 0; index < bn::display::height(); ++index)
         {
             int reciprocal = bn::reciprocal_lut[index].data() >> 4;
-            int lam = camera_y * reciprocal >> 12;
-            int lcf = lam * camera_cos >> 8;
-            int lsf = lam * camera_sin >> 8;
+            int lambda = camera_y * reciprocal >> 12;
+            int lcf = lambda * camera_cos >> 8;
+            int lsf = lambda * camera_sin >> 8;
 
             pa_values[index] = int16_t(lcf >> 4);
             pc_values[index] = int16_t(lsf >> 4);
