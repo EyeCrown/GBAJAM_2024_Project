@@ -13,29 +13,19 @@ namespace mygame
 {
     struct camera
     {
-        bn::fixed x = 0;
-        bn::fixed y = 32;
-        bn::fixed z = 0;
-
-        mygame::vector position;
-        mygame::vector direction;
+        mygame::vector3 position;
+        mygame::vector3 direction;
 
         int phi = 0;
         int cos = 0;
         int sin = 0;
-
-        
     };
     
-    class Player 
+    class Player
     {
         public:
 
-        mygame::vector position;
-
-        int phi = 0;
-        int cos = 0;
-        int sin = 0;
+        mygame::vector3 position;
 
         mygame::camera camera;
 

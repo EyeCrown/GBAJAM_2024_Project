@@ -4,13 +4,41 @@
 
 namespace mygame
 {
-    struct vector
+    struct vector2
+    {
+        bn::fixed x;
+        bn::fixed y;
+
+        vector2() : x(0), y(0) {}
+        vector2(bn::fixed xValue, bn::fixed yValue) : x(xValue), y(yValue) {}
+    };
+
+    struct vector3
     {
         bn::fixed x;
         bn::fixed y;
         bn::fixed z;
 
-        vector() : x(0), y(0), z(0) {}
-        vector(bn::fixed xValue, bn::fixed yValue, bn::fixed zValue) : x(xValue), y(yValue), z(zValue) {}
+        vector3() : x(0), y(0), z(0) {}
+        vector3(bn::fixed xValue, bn::fixed yValue, bn::fixed zValue) : x(xValue), y(yValue), z(zValue) {}
+
+        vector3& operator+(const vector3 other) 
+        {
+            x += other.x;
+            y += other.y;
+            z += other.z;
+        }
+
+        vector3& operator-(const vector3 other) 
+        {
+            x -= other.x;
+            y -= other.y;
+            z -= other.z;
+        }
+    };
+
+    struct matrix 
+    {
+
     };
 }
