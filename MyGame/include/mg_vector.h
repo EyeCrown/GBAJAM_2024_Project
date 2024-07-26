@@ -22,6 +22,11 @@ namespace mygame
         vector3() : x(0), y(0), z(0) {}
         vector3(bn::fixed xValue, bn::fixed yValue, bn::fixed zValue) : x(xValue), y(yValue), z(zValue) {}
 
+        bn::fixed dot(const vector3 other)
+        {
+            return x * other.x + y * other.y + z * other.z;
+        }
+
         vector3& operator+(const vector3 other) 
         {
             x += other.x;

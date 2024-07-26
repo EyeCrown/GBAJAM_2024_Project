@@ -14,7 +14,10 @@ namespace mygame
     struct camera
     {
         mygame::vector3 position;
-        mygame::vector3 direction;
+        
+        mygame::vector3 local_x_axis;   // RIGHT 
+        mygame::vector3 local_y_axis;   // UP (0, 1, 0)
+        mygame::vector3 local_z_axis;   // FRONT
 
         int phi = 0;
         int cos = 0;
