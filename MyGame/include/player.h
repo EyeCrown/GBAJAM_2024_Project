@@ -48,8 +48,8 @@ namespace mygame
     
         private:
 
-        const bn::fixed mOffsetCameraX = 0;  // 5.0
-        const bn::fixed mOffsetCameraZ = 1;  // 5.0
+        const bn::fixed mOffsetCameraX = 0;
+        const bn::fixed mOffsetCameraZ = 1;
 
         bn::sprite_ptr mSprite = bn::sprite_items::red_sprite.create_sprite(0,100);
     };

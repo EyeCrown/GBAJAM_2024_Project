@@ -22,6 +22,8 @@
 
 namespace
 {
+    int y_shifter = 128;
+
     void update_hbe_values(const mygame::Player& player, int16_t* pa_values, int16_t* pc_values, int* dx_values, int* dy_values)
     {
         int camera_x = player.camera.position.x.data();
@@ -29,7 +31,7 @@ namespace
         int camera_z = player.camera.position.z.data();
         int camera_cos = player.camera.cos;
         int camera_sin = player.camera.sin;
-        int y_shift = 1024;
+        int y_shift = y_shifter; //1024;
 
         for(int index = 0; index < bn::display::height(); ++index)
         {
@@ -64,7 +66,7 @@ int main()
         "B/A: move camera y",
     };
 
-    common::info info("My Game", info_text_lines, text_generator);
+    //common::info info("My Game", info_text_lines, text_generator);
 
 
     bn::affine_bg_ptr bg = bn::affine_bg_items::land.create_bg(0, 0);
@@ -98,12 +100,12 @@ int main()
 
 
 
-    bn::sprite_ptr enemy_sprite = bn::sprite_items::enemy01idle.create_sprite(70, 0);
+    //bn::sprite_ptr enemy_sprite = bn::sprite_items::enemy01idle.create_sprite(70, 0);
     
     // bn::sprite_animate_action<8> enemy_sprite_action = bn::create_sprite_animate_action_forever(
     //                 enemy_sprite, 8, bn::sprite_items::enemy01idle.tiles_item(), 0, 1, 2, 3, 4, 5, 6, 7);
 
-    mygame::Object enemy = mygame::Object(xStart, zStart, &enemy_sprite);
+    // mygame::Object enemy = mygame::Object(xStart, zStart, &enemy_sprite);
 
 
     while(true)
@@ -141,29 +143,44 @@ int main()
                         player_body_sprite, 16, bn::sprite_items::player_body.tiles_item(), 0, 1, 2, 3);
         }
 
-
-        bn::fixed scale = enemy.spriteObj.horizontal_scale();
-
         if(bn::keypad::l_held())
         {
-            scale -= 0.01;
-            enemy.spriteObj.set_horizontal_scale(bn::max(scale, bn::fixed(0.01)));
-            enemy.spriteObj.set_vertical_scale(bn::max(scale, bn::fixed(0.01)));
+            y_shifter -= 16;
 
+            if (y_shifter < 0)
+                y_shifter = 0;
         }
         else if(bn::keypad::r_held())
         {
-            scale += 0.01;
-            enemy.spriteObj.set_horizontal_scale(bn::min(scale, bn::fixed(2)));
-            enemy.spriteObj.set_vertical_scale(bn::min(scale, bn::fixed(2)));
+            y_shifter += 16;
 
+            if (y_shifter > 4096)
+                y_shifter = 4096;
         }
+
+        
+        // bn::fixed scale = enemy.spriteObj.horizontal_scale();
+
+        // if(bn::keypad::l_held())
+        // {
+        //     scale -= 0.01;
+        //     enemy.spriteObj.set_horizontal_scale(bn::max(scale, bn::fixed(0.01)));
+        //     enemy.spriteObj.set_vertical_scale(bn::max(scale, bn::fixed(0.01)));
+
+        // }
+        // else if(bn::keypad::r_held())
+        // {
+        //     scale += 0.01;
+        //     enemy.spriteObj.set_horizontal_scale(bn::min(scale, bn::fixed(2)));
+        //     enemy.spriteObj.set_vertical_scale(bn::min(scale, bn::fixed(2)));
+
+        // }
 
         action.update();
 
-        enemy._update(player);
+        // enemy._update(player);
     
-        info.update();
+        //info.update();
         bn::core::update();
     }
 }
